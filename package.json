@@ -1,0 +1,59 @@
+{
+  "name": "kaomoji-avatar-kit",
+  "version": "0.1.0",
+  "description": "Reusable 2D kaomoji avatar kit. Drop-in SVG persona plus a template bot backend.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/avatar/index.d.ts",
+      "import": "./dist/avatar/index.js"
+    },
+    "./template": {
+      "types": "./dist/template/index.d.ts",
+      "import": "./dist/template/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "server",
+    "src/avatar",
+    "src/template",
+    "README.md",
+    "KAOMOJI_AVATAR_KIT.md"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,bot \"vite\" \"tsx watch server/index.ts\"",
+    "dev:web": "vite",
+    "server": "tsx watch server/index.ts",
+    "build": "tsc -p tsconfig.json --noEmit && vite build && npm run build:lib",
+    "build:app": "vite build",
+    "build:lib": "tsc -p tsconfig.lib.json && node scripts/copy-css.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "motion": "^12.23.12",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^5.0.2",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vitest": "^3.2.4"
+  },
+  "peerDependencies": {
+    "motion": "^12.0.0",
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
+  }
+}
